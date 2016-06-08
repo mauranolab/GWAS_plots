@@ -39,7 +39,7 @@ warn "Using pvalues in $pbed\n";
 
 
 my $basedir = "..";
-my $rscript = "$basedir/src/unthresholded_fisher_lowPvalueSNPsEnrichedInDHSs.R";
+#my $rscript = "$basedir/src/unthresholded_fisher_lowPvalueSNPsEnrichedInDHSs.R";
 #my $bedopsdir = "$basedir/x86_64";
 my $excludebed = "$basedir/hg19/ccdsGene.Exons.bed";
 
