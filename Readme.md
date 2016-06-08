@@ -3,9 +3,9 @@
 Performs enrichment plots of GWAS p-value lists in DHSs (like Fig. 5 of Maurano, Humbert, et al. Science 2012)<p>
 
 The two key scripts are in src. The pipeline is divided into a Perl script which processes the overlap, and then a second script which does the plotting in R.<br>
-<ol><li>You can run the overlap as follows:<br>
+<ol><li>Run the overlap of the p-value file with the DHS master list<br>
 <pre>cd src
-perl ./gwasVsRegions.pl -p pvalues.hg19.bed5 -s ../hg19/namedFDR5pctHotspots.starch -r ../results_hotspots_nocoding</pre>
+perl ./gwasVsRegions.pl -p pvalues.hg19.YOURSTUDY.bed5 -s ../hg19/namedFDR5pctHotspots.starch -r ../results_hotspots_nocoding</pre>
 
 The P-value file is provided by the user. It includes the dbSNP ID in  column 4, and the P-value in column 5; only the latter is actually used.<p>
 
