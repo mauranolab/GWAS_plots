@@ -1,9 +1,9 @@
 #GWAS_plots
-
 Performs enrichment plots of GWAS p-value lists in DHSs (like Fig. 5 of Maurano, Humbert, et al. Science 2012)<p>
 
 NB: Due to github limits on file sizes, you will need to download namedFDR5pctHotspots.starch from http://www.uwencode.org/proj/Science_Maurano_Humbert_et_al/namedFDR5pctHotspots.starch and place it in the hg19 folder.<p>
 
+#Instructions
 The two key scripts are in src. The pipeline is divided into a Perl script which processes the overlap, and then a second script which does the plotting in R.<br>
 <ol><li>Run the overlap of the p-value file with the DHS master list<br>
 <pre>cd src
