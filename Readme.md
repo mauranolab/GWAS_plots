@@ -11,7 +11,7 @@ The P-value file is provided by the user. It includes the dbSNP ID in  column 4,
 
 namedFDR5pctHotspots.starch is a starch archive (see BEDOPS) containing the DHS master list.<p>
 
-The intermediate results go into results_hotspots_nocoding/crohns. There is one text file per cell type, though you can see at the end of a Perl script I put all of these together into a single file before plotting.<p>
+The intermediate results go into results_hotspots_nocoding/YOURSTUDY. There is one text file per cell type, though you can see at the end of a Perl script I put all of these together into a single file before plotting.<p>
 
 Samples listed in excluded_samples.txt will be ignored<p>
 
