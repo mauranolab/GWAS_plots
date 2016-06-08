@@ -1,7 +1,9 @@
+#GWAS_plots
+
 Performs enrichment plots of GWAS p-value lists in DHSs (like Fig. 5 of Maurano, Humbert, et al. Science 2012)
 
 The two key scripts are in src. The pipeline is divided into a Perl script which processes the overlap, and then a second script which does the plotting in R.
-1) You can run the overlap as follows:
+<ol><li>You can run the overlap as follows:
 cd src
 perl ./gwasVsRegions.pl -p pvalues.hg19.bed5 -s ../hg19/namedFDR5pctHotspots.starch -r ../results_hotspots_nocoding
 
@@ -16,8 +18,7 @@ Samples listed in excluded_samples.txt will be ignored
 (This script was written by Eric Haugen, UW)
 
 
-2) doGWASPlot.R is the plotting script. It is invoked automatically at the end of the overlap script. You can see that right now only the x-axis upper limit and of the number of cell types to label are parameterized on the command line. If you look inside, you'll see that the legendSamples list maps samples to group names and colors using regexp.
-
+<li>doGWASPlot.R is the plotting script. It is invoked automatically at the end of the overlap script. You can see that right now only the x-axis upper limit and of the number of cell types to label are parameterized on the command line. If you look inside, you'll see that the legendSamples list maps samples to group names and colors using regexp.
 
 This could be easily parallelized by chromosome.
 
@@ -27,3 +28,4 @@ Key variables for each plot need to be optimized by the user:
 * The sample groups and labels (i.e. endothelia, muscle, fetal, etc.)
 * adjusting the range of the X and Y axes
 * plot title
+</ol>
