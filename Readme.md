@@ -18,7 +18,8 @@ Samples listed in excluded_samples.txt will be ignored<p>
 (This script was written by Eric Haugen, UW)<p>
 
 
-<li>doGWASPlot.R is the plotting script. It is invoked automatically at the end of the overlap script. You can see that right now only the x-axis upper limit and of the number of cell types to label are parameterized on the command line. If you look inside, you'll see that the legendSamples list maps samples to group names and colors using regexp.<p>
+<li>doGWASPlot.R is the plotting script.<br>
+It is invoked automatically at the end of the overlap script. You can see that right now only the x-axis upper limit and of the number of cell types to label are parameterized on the command line. If you look inside, you'll see that the legendSamples list maps samples to group names and colors using regexp.<p>
 
 This could be easily parallelized by chromosome.<p>
 
