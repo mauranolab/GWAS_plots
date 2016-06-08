@@ -9,7 +9,7 @@ Requirements:<br>
 <li>perl
 <li>R with ggplot
 <li>DHS master list. Due to github limits on file sizes, you will need to download namedFDR5pctHotspots.starch from http://www.uwencode.org/proj/Science_Maurano_Humbert_et_al/data/namedFDR5pctHotspots.starch and place it in the hg19 folder.
-</ul>>
+</ul>
 
 #Instructions
 The two key scripts are in src. The pipeline is divided into a Perl script which processes the overlap, and then a second script which does the plotting in R.<br>
