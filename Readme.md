@@ -18,7 +18,7 @@ The GWAS P-value file is a tab-delimited file provided by the user. It includes 
 
 #Details
 The two key scripts are in src. The pipeline is divided into a Perl script which processes the overlap, and then a second script which does the plotting in R:<br>
-<ol><li>Run the overlap of the p-value file with the DHS master list<br>
+<ol><li>gwasVsRegions.pl runs the overlap of the p-value file with the DHS master list<br>
 
 The intermediate results go into results_hotspots_nocoding/YOURSTUDY. There is one text file per cell type, though you can see at the end of a Perl script I put all of these together into a single file before plotting.<p>
 
