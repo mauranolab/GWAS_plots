@@ -1,6 +1,41 @@
 #!/usr/bin/env Rscript
 #Author: Matt Maurano
 
+
+###Utility functions
+#read() -- smarter wrapper around read.table
+#BUGBUG who knows why i'm getting "zcat: stdout: Broken pipe" on first read.table
+#TODO seems I need to use gzcat on the mac and zcat on linux
+read <- function(filename, nrows=100, header=F, col.classes=NULL, stringsAsFactors=F, ...) {
+	#BUGBUG should print example line of file upon failure
+	#TODO can't use a pipe or specify which columns to use
+	#BUGBUG when the first column is all characters, R tries to use it as row names. But this goofs up my hardcoded colClasses. row.names=NULL doesn't work in the function, though it works interactively.
+	
+	if(!file.exists(filename)) {
+		stop(filename, " does not exist!\n")
+	}
+	readCmd <- paste("zcat -f \"", filename, "\"", sep="")
+#	cat("reading with:", readCmd, "\n")
+	if(is.null(col.classes)) {
+		#Let R estimate the column classes so we can hardcode it later
+		#Hijack nrows parameter for the number of rows upon which to estimate classes (the real number of rows is used for the final read.table)
+		
+		shortcopy <- read.table(pipe(readCmd), sep="\t", comment.char = "", quote = "", strip.white = TRUE, stringsAsFactors = F, nrows=nrows, header=header, ...)
+		guessed.classes <- lapply(shortcopy, typeof)
+	} else {
+		guessed.classes <- col.classes
+	}
+	
+	#Let UNIX tell us how much memory to allocate
+	wcpipe <- pipe(paste(readCmd, " | wc -l | awk '{print $1}' ", sep=""))
+	num.lines <- as.integer(readLines(wcpipe))
+	close(wcpipe)
+	
+	return(read.table(pipe(readCmd), sep="\t", comment.char = "", quote = "", strip.white = TRUE, stringsAsFactors = stringsAsFactors, nrows=num.lines, colClasses=guessed.classes, header=header, ...))
+}
+
+
+###Main code
 argv <- commandArgs(TRUE)
 f <- argv[1]
 pthresh <- as.numeric(argv[2])
@@ -61,7 +96,7 @@ tmp$logp <- -log(tmp$GWAS_P_threshold, base=10)
 library(ggplot2)
 library(directlabels)
 old <- theme_set(theme_bw(base_size=8))
-old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=theme_text(size=6, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
+old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=element_text(size=6, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
 #old <- theme_update(plot.margin=unit(c(0,7,0,0), "lines")) #NB top, rt, bot, left
 
 labels.cex <- 0.5
@@ -82,10 +117,10 @@ doPlot <- function () {
 	print(ggplot() + # & Expected_overlaps>20
 	geom_line(data=subset(tmp, grepl("^other", celltype)), aes(x=logp, y=Enrichment, group=DHS, color=celltype)) +
 	geom_line(data=subset(tmp, !grepl("^other", celltype)), aes(x=logp, y=Enrichment, group=DHS, color=celltype)) +
-	geom_dl(data=tmp.labelFrame, aes(x=logp, y=Enrichment, color=celltype, label=gsub("-DS.+$", "", DHS)), list(last.points, cex=labels.cex, hjust=0)) +
+	geom_dl(data=tmp.labelFrame, aes(x=logp, y=Enrichment, color=celltype, label=gsub("-DS.+$", "", DHS)), method=list(last.points, cex=labels.cex, hjust=0)) +
 guides(color = guide_legend(override.aes = list(size=5, linetype=1))) +#hack to get legend symbol to be square not dot
 	scale_color_manual(name="", values=celltype.colors) +
-	opts(legend.position = c(0.13, 0.82)) +
+	theme(legend.position = c(0.13, 0.82)) +
 	scale_x_continuous("GWAS P-value threshold", limits=c(0, x_lim), expand=c(0.1,0)) + scale_y_continuous("Fold enrichment of SNPs in DHSs", limits=y_lim, expand=c(0,0.05)))
 }
 
@@ -97,7 +132,7 @@ dev.off()
 
 #resize for png
 old <- theme_set(theme_bw(base_size=12))
-old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=theme_text(size=10, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
+old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=element_text(size=10, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
 
 labels.cex <- 1
 
