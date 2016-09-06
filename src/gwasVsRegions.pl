@@ -163,7 +163,8 @@ print "Making plot ".(localtime);
 print "\n";
 my($plot_pthresh) = 1e-20;
 my($plot_numLabels) = 50;
-my($plotCmd)="tail -q -n +2 $outputDir/* | grep -v -f excluded_samples.txt > \$TMPDIR/t.txt; ./GWASPlot.R \$TMPDIR/t.txt $plot_pthresh $plot_numLabels $outputDir/$gwasName";
+my($plotCmd)="tail -q -n +2 $outputDir/*.txt | grep -v -f excluded_samples.txt > \$TMPDIR/t.txt; ./GWASPlot.R \$TMPDIR/t.txt $plot_pthresh $plot_numLabels $outputDir/$gwasName";
+print "Plot command: $plotCmd";
 system $plotCmd;
 
 
