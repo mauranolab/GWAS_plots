@@ -10,7 +10,7 @@ Performs enrichment plots of GWAS p-value lists in DHSs (like Fig. 5 of Maurano,
 <li>DHS master list. Due to github limits on file sizes, you will need to download namedFDR5pctHotspots.starch from http://www.uwencode.org/proj/Science_Maurano_Humbert_et_al/data/namedFDR5pctHotspots.starch and place it in the hg19 folder.
 </ul>
 
-#Example
+#Example usage
 <pre>cd src
 perl ./gwasVsRegions.pl -p pvalues.hg19.YOURSTUDY.bed5 -s ../hg19/namedFDR5pctHotspots.starch -r ../results_hotspots_nocoding</pre>
 
