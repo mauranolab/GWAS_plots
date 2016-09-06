@@ -61,7 +61,7 @@ tmp$logp <- -log(tmp$GWAS_P_threshold, base=10)
 library(ggplot2)
 library(directlabels)
 old <- theme_set(theme_bw(base_size=8))
-old <- theme_update(panel.grid.minor = theme_blank(), panel.grid.major = theme_blank(), axis.text.x=theme_text(size=6, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
+old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=theme_text(size=6, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
 #old <- theme_update(plot.margin=unit(c(0,7,0,0), "lines")) #NB top, rt, bot, left
 
 labels.cex <- 0.5
@@ -97,7 +97,7 @@ dev.off()
 
 #resize for png
 old <- theme_set(theme_bw(base_size=12))
-old <- theme_update(panel.grid.minor = theme_blank(), panel.grid.major = theme_blank(), axis.text.x=theme_text(size=10, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
+old <- theme_update(panel.grid.minor = element_blank(), panel.grid.major = element_blank(), axis.text.x=theme_text(size=10, hjust=1, vjust=1))# , axis.ticks.length=unit(0.1, "lines") )
 
 labels.cex <- 1
 
