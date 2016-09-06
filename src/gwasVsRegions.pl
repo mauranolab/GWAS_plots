@@ -8,7 +8,7 @@ use Getopt::Std;
 
 sub usage
 {
-    die "Usage:  $0  -p [pvalues.hg19.[GWASname].bed5] -s [starch file with DHS] -r [output results dir]\n";
+    die "Usage:  $0  -p [pvalues.hg19.[GWASname].bed5/starch] -s [starch file with DHS] -r [output results dir]\n";
     exit(1);
 }
 
@@ -163,7 +163,7 @@ print "Making plot ".(localtime);
 print "\n";
 my($plot_pthresh) = 1e-20;
 my($plot_numLabels) = 50;
-my($plotCmd)="tail -q -n +2 $outputDir/* | grep -v -f excluded_samples.txt > \$TMPDIR/t.txt; ./doGWASPlot.R \$TMPDIR/t.txt $plot_pthresh $plot_numLabels $outputDir/$gwasName";
+my($plotCmd)="tail -q -n +2 $outputDir/* | grep -v -f excluded_samples.txt > \$TMPDIR/t.txt; ./GWASPlot.R \$TMPDIR/t.txt $plot_pthresh $plot_numLabels $outputDir/$gwasName";
 system $plotCmd;
 
 
